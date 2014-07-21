@@ -52,4 +52,8 @@ public class AppTest
     	
     }
     
+    public void test03(){
+    	System.out.println(3 / 5);
+    }
+    
 }

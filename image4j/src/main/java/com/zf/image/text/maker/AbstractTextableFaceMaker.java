@@ -2,11 +2,14 @@ package com.zf.image.text.maker;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.List;
+
+import sun.font.FontDesignMetrics;
 
 import com.facemake.util.StringUtil;
 import com.zf.image.text.TextRegional;
@@ -55,18 +58,40 @@ public abstract class AbstractTextableFaceMaker {
 
 		Graphics graph = image.getGraphics() ;
 		for (int i = 0; i < texts.size() ; i++) {
+			String text = texts.get(i) ;
+			if(StringUtil.isBlank(text)){
+				continue ;
+			}
+			
 			TextRegional textRegional = textRegionals.get(i) ;
 			Font font = getFontFromRegional(textRegional) ;
 			graph.setFont(font);
 			graph.setColor(new Color(textRegional.getColor()));  
-			String text = texts.get(i);
-			if(StringUtil.isBlank(text)){
-				continue ;
+			
+			FontMetrics fontMetrics = FontDesignMetrics.getMetrics(font);
+			int regionalWidth = textRegional.getWidth() ;
+			int textWidth = fontMetrics.stringWidth(" ") ;
+			int lineSize = regionalWidth / textWidth ;
+			int rowCount = text.length() % lineSize == 0 ?
+					(text.length()) / lineSize : (text.length() / lineSize + 1) ;
+			
+			
+			Point point = textRegional.getPoint() ;
+			for (int j = 0; j < rowCount ; j++) {  
+				int start =  j * lineSize;
+				int end = start + lineSize ;
+				if(end >= text.length() -1 ){
+					end = text.length() - 1 ;
+				}
+				String lineStr = text.substring(start , end) ;
+				
+				point.y += textWidth ;
+				
+				graph.drawString(lineStr, point.x, point.y); 
 			}
-			Point leftUpPoint = textRegional.getPoint() ;
-			graph.drawString(text, leftUpPoint.x, leftUpPoint.y); 
+			
 		}
 	}
 
-	
+
 }
