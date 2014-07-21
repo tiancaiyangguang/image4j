@@ -9,65 +9,71 @@ import java.awt.Point;
  */
 public class TextRegional {
 
-	private Point leftUp ;
-	private Point rightUp ;
-	private Point leftDown ;
-	private Point rightDown ;
+	private Point point ;
+	private int width ;
+	private int hight ;
 	
 	private String fontType ;
 	private int fontSize ;
 	private int maxTextSize ;
 	private int color ;
 	
-	public Point getLeftUp() {
-		return leftUp;
+	public Point getPoint() {
+		return point;
 	}
-	public void setLeftUp(Point leftUp) {
-		this.leftUp = leftUp;
+
+	public void setPoint(Point point) {
+		this.point = point;
 	}
-	public Point getRightUp() {
-		return rightUp;
+
+	public int getWidth() {
+		return width;
 	}
-	public void setRightUp(Point rightUp) {
-		this.rightUp = rightUp;
+
+	public void setWidth(int width) {
+		this.width = width;
 	}
-	public Point getLeftDown() {
-		return leftDown;
+
+	public int getHight() {
+		return hight;
 	}
-	public void setLeftDown(Point leftDown) {
-		this.leftDown = leftDown;
+
+	public void setHight(int hight) {
+		this.hight = hight;
 	}
-	public Point getRightDown() {
-		return rightDown;
-	}
-	public void setRightDown(Point rightDown) {
-		this.rightDown = rightDown;
-	}
+
 	public String getFontType() {
 		return fontType;
 	}
+
 	public void setFontType(String fontType) {
 		this.fontType = fontType;
 	}
+
 	public int getFontSize() {
 		return fontSize;
 	}
+
 	public void setFontSize(int fontSize) {
 		this.fontSize = fontSize;
 	}
+
 	public int getMaxTextSize() {
 		return maxTextSize;
 	}
+
 	public void setMaxTextSize(int maxTextSize) {
 		this.maxTextSize = maxTextSize;
 	}
+
 	public int getColor() {
 		return color;
 	}
+
 	public void setColor(int color) {
 		this.color = color;
 	}
-	
+
 	public void setRGB(int r , int g , int b){
 		this.color = new Color(r, g, b).getRGB() ;
 	}

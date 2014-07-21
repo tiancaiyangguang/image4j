@@ -63,7 +63,7 @@ public abstract class AbstractTextableFaceMaker {
 			if(StringUtil.isBlank(text)){
 				continue ;
 			}
-			Point leftUpPoint = textRegional.getLeftUp() ;
+			Point leftUpPoint = textRegional.getPoint() ;
 			graph.drawString(text, leftUpPoint.x, leftUpPoint.y); 
 		}
 	}
