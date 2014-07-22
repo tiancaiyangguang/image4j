@@ -16,6 +16,9 @@ import com.zf.image.text.TextRegional;
 import com.zf.image.text.TextableSourceFace;
 
 public abstract class AbstractTextableFaceMaker {
+	
+	public static final String DEFAULT_FONT_NAME = "宋体";
+	public static final int DEFAULT_FONT_SIZE = 12 ;
 
 	public abstract InputStream  format( TextableSourceFace sourceFace , InputStream sourceImgStream , List<String> texts);
 	
@@ -26,14 +29,13 @@ public abstract class AbstractTextableFaceMaker {
 		String fontType = textRegional.getFontType() ;
 		int fontSize = textRegional.getFontSize() ;
 		if(StringUtil.isBlank(fontType)){
-			fontType = StaticImgTextableFaceMaker.DEFAULT_FONT_NAME;
+			fontType = AbstractTextableFaceMaker.DEFAULT_FONT_NAME;
 		}
 		if(fontSize <= 0){
-			fontSize = StaticImgTextableFaceMaker.DEFAULT_FONT_SIZE ;
+			fontSize = AbstractTextableFaceMaker.DEFAULT_FONT_SIZE ;
 		}
-		return new Font(
-				fontType, 
-				Font.BOLD , fontSize ) ;
+		int fontStyle = textRegional.getFontStyle() ;
+		return new Font(fontType, fontStyle , fontSize ) ;
 	}
 
 	/**
@@ -70,8 +72,9 @@ public abstract class AbstractTextableFaceMaker {
 			
 			FontMetrics fontMetrics = FontDesignMetrics.getMetrics(font);
 			int regionalWidth = textRegional.getWidth() ;
-			int textWidth = fontMetrics.stringWidth(" ") ;
-			int lineSize = regionalWidth / textWidth ;
+			int fontWidth = fontMetrics.stringWidth(" ") ;
+			int fontHeight = fontMetrics.getHeight() ;
+			int lineSize = regionalWidth / fontWidth ;
 			int rowCount = text.length() % lineSize == 0 ?
 					(text.length()) / lineSize : (text.length() / lineSize + 1) ;
 			
@@ -80,12 +83,12 @@ public abstract class AbstractTextableFaceMaker {
 			for (int j = 0; j < rowCount ; j++) {  
 				int start =  j * lineSize;
 				int end = start + lineSize ;
-				if(end >= text.length() -1 ){
-					end = text.length() - 1 ;
+				if(end > text.length()){
+					end = text.length();
 				}
 				String lineStr = text.substring(start , end) ;
 				
-				point.y += textWidth ;
+				point.y += fontHeight ;  
 				
 				graph.drawString(lineStr, point.x, point.y); 
 			}

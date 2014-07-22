@@ -18,8 +18,6 @@ import com.zf.image.text.TextableSourceFace;
 public class StaticImgTextableFaceMaker extends AbstractTextableFaceMaker{
 	
 	public static final String IMAGE_FORMAT_NAME = "jpg" ;
-	public static final String DEFAULT_FONT_NAME = "宋体";
-	public static final int DEFAULT_FONT_SIZE = 12 ;
 
 	public InputStream format(TextableSourceFace sourceFace ,InputStream sourceImgStream , List<String> texts){
 		if(sourceImgStream == null){

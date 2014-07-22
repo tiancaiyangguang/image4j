@@ -12,7 +12,7 @@ public class TextableSourceFace implements SourceFace{
 
 	public static final String REGIONALS_KEY = "regionals";
 
-	public static final String REGIONALS_SIZE = "regionals_size";
+	public static final String REGIONALS_SIZE_KEY = "regionals_size";
 
 	/* 图像宽度 */
 	private int width ;
@@ -76,7 +76,7 @@ public class TextableSourceFace implements SourceFace{
 	public int getTextRegionalsSize() {
 		int size = 0 ;
 		if(StringUtil.isNotBlank(attributes)){
-			Integer sizeInteger = JsonUtil.getValueFromJsonString(REGIONALS_SIZE,attributes, Integer.class) ;
+			Integer sizeInteger = JsonUtil.getValueFromJsonString(REGIONALS_SIZE_KEY,attributes, Integer.class) ;
 			if(sizeInteger != null){
 				size = sizeInteger.intValue() ;
 			}

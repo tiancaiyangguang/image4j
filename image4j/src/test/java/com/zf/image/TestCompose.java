@@ -3,6 +3,7 @@ package com.zf.image;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,17 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import com.facemake.util.JsonUtil;
-import com.facemake.util.TimerUtil;
+import com.zf.image.compose.ImageComposeor;
+import com.zf.image.compose.ImageFrame;
 import com.zf.image.text.TextRegional;
 import com.zf.image.text.TextableSourceFace;
-import com.zf.image.text.maker.AbstractTextableFaceMaker;
-import com.zf.image.text.maker.StaticImgTextableFaceMaker;
 
-public class TestJPGFace02 {
+public class TestCompose {
+	
 	
 	public TextableSourceFace getTextableSourceFace(){
 		TextableSourceFace face = new TextableSourceFace();
@@ -37,14 +40,14 @@ public class TestJPGFace02 {
 		List<TextRegional> regionals = face.getTextRegionals() ;
 		
 		TextRegional r1 = new TextRegional();
-		r1.setFontSize(15);
+		r1.setFontSize(18);
 		r1.setFontType("仿宋");
 		r1.setFontStyle(Font.PLAIN | Font.ITALIC );
-		r1.setPoint(new Point(20, 13));  
-		r1.setWidth(30);
+		r1.setPoint(new Point(20, 30));  
+		r1.setWidth(15);
 		r1.setHight(100);
 		r1.setMaxTextSize(3);  
-		r1.setColor(Color.CYAN.getRGB());
+		r1.setColor(Color.red.getRGB());
 		
 
 		TextRegional r2 = new TextRegional();
@@ -81,32 +84,32 @@ public class TestJPGFace02 {
 		return null ;
 	}
 	
-	
-	
 	@Test
-	public void testStaticImg(){
+	public void test() throws IOException{
+		BufferedImage img1 = ImageIO.read(getSourceImage("11.jpg"));
+		BufferedImage img2 = ImageIO.read(getSourceImage("22.jpg"));
+		BufferedImage img3 = ImageIO.read(getSourceImage("33.jpg"));
 		
-		TimerUtil.start("sss");
+		ImageFrame if1 = new ImageFrame(img1 , 500) ;
+		ImageFrame if2 = new ImageFrame(img2 , 500) ;
+		ImageFrame if3 = new ImageFrame(img3 , 500) ;
 		
-		AbstractTextableFaceMaker imgMaker = new StaticImgTextableFaceMaker() ;
+		List<ImageFrame> images = new ArrayList<ImageFrame>() ;
+		images.add(if1);
+		images.add(if2);
+		images.add(if3);
 		
-		List<String> texts = new ArrayList<String>() ;
-		texts.add("管子");
-//		texts.add("自己说牛不牛逼，傻屌！！！");
+		ImageComposeor composeor = new ImageComposeor() ;
 		
-		InputStream result = imgMaker.format(getTextableSourceFace(), getSourceImage("2.jpg"), texts) ;
-
+		InputStream result =  composeor.compose(images, 10000) ;
+		
 		try {
-			IOUtils.copy(result, new FileOutputStream(new File("C:/Users/Administrator/Desktop/22.jpg"))) ;
+			IOUtils.copy( result, new FileOutputStream(new File("C:/Users/Administrator/Desktop/com.gif"))) ;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		long time = TimerUtil.timing() ;
-		System.out.println(time);
-		
 	}
-	
+
 }

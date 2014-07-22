@@ -15,6 +15,7 @@ public class TextRegional {
 	
 	private String fontType ;
 	private int fontSize ;
+	private int fontStyle ;
 	private int maxTextSize ;
 	private int color ;
 	
@@ -72,6 +73,14 @@ public class TextRegional {
 
 	public void setColor(int color) {
 		this.color = color;
+	}
+	
+	public int getFontStyle() {
+		return fontStyle;
+	}
+
+	public void setFontStyle(int fontStyle) {
+		this.fontStyle = fontStyle;
 	}
 
 	public void setRGB(int r , int g , int b){
