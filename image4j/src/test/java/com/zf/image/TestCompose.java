@@ -86,13 +86,10 @@ public class TestCompose {
 	
 	@Test
 	public void test() throws IOException{
-		BufferedImage img1 = ImageIO.read(getSourceImage("11.jpg"));
-		BufferedImage img2 = ImageIO.read(getSourceImage("22.jpg"));
-		BufferedImage img3 = ImageIO.read(getSourceImage("33.jpg"));
 		
-		ImageFrame if1 = new ImageFrame(img1 , 500) ;
-		ImageFrame if2 = new ImageFrame(img2 , 500) ;
-		ImageFrame if3 = new ImageFrame(img3 , 500) ;
+		ImageFrame if1 = new ImageFrame(getSourceImage("11.jpg") , 500) ;
+		ImageFrame if2 = new ImageFrame(getSourceImage("22.jpg") , 500) ;
+		ImageFrame if3 = new ImageFrame(getSourceImage("33.jpg") , 500) ;
 		
 		List<ImageFrame> images = new ArrayList<ImageFrame>() ;
 		images.add(if1);
@@ -104,7 +101,7 @@ public class TestCompose {
 		InputStream result =  composeor.compose(images, 10000) ;
 		
 		try {
-			IOUtils.copy( result, new FileOutputStream(new File("D:/imgtest/com.gif"))) ;
+			IOUtils.copy( result, new FileOutputStream(new File("C:/Users/Administrator/git/image4j/image4j/imgs/com.gif"))) ;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

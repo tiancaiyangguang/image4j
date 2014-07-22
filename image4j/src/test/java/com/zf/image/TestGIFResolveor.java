@@ -5,9 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
-import javax.imageio.ImageIO;
+import org.apache.commons.io.IOUtils;
 
 import com.zf.image.compose.GIFImage;
 import com.zf.image.compose.GIFResolveor;
@@ -22,7 +21,7 @@ public class TestGIFResolveor {
 		GIFResolveor resolver = new GIFResolveor() ;
 		
 		
-		InputStream sourceImg = new FileInputStream(new File("D:/imgtest/com.gif")) ;
+		InputStream sourceImg = new FileInputStream(new File("C:/Users/Administrator/Desktop/imgs/com.gif")) ;
 		GIFImage gifImage = resolver.resolve(sourceImg) ;
 		sourceImg.close(); 
 
@@ -31,18 +30,8 @@ public class TestGIFResolveor {
 		for (int j = 0; j < gifImage.getFrames().size() ; j++) {
 			ImageFrame imageFrame = gifImage.getFrames().get(i) ;
 			try {
-				File dir =  new File("D:/imgtest/") ;
-				if(!dir.exists()){
-					dir.mkdirs() ;
-				}
 
-				File file = new File(dir , "com" + j + ".jpg");
-				file.createNewFile() ;
-
-				OutputStream bos = new FileOutputStream( file) ;
-
-				ImageIO.write(imageFrame.getImage(), "jpg", bos) ;
-				bos.close(); 
+				IOUtils.copy(imageFrame.getImage(), new FileOutputStream(new File("C:/Users/Administrator/Desktop/imgs/com" + j + ".jpg"))) ;
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 

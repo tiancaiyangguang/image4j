@@ -1,6 +1,7 @@
 package com.zf.image.compose;
 
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 
 /**
  * 图片的一帧（用于合成图片） 
@@ -13,11 +14,11 @@ public class ImageFrame {
 	private int delay ;
 	
 	//图片内容
-	private BufferedImage image ;
+	private InputStream image ;
 	
 	public ImageFrame() {}
 
-	public ImageFrame(BufferedImage image , int delay) {
+	public ImageFrame(InputStream image , int delay) {
 		this.image = image;
 		this.delay = delay;
 	}
@@ -30,11 +31,11 @@ public class ImageFrame {
 		this.delay = delay;
 	}
 
-	public BufferedImage getImage() {
+	public InputStream getImage() {
 		return image;
 	}
 
-	public void setImage(BufferedImage image) {
+	public void setImage(InputStream image) {
 		this.image = image;
 	}
 

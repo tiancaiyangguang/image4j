@@ -1,9 +1,14 @@
 package com.zf.image.compose;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import com.madgag.gif.fmsware.GifDecoder;
 
@@ -27,7 +32,13 @@ public class GIFResolveor {
 
 		for (int i = 0; i < frameCount ; i++) {
 			BufferedImage img = gifDecoder.getFrame(i) ;
-			frames.add(new ImageFrame(img, gifDecoder.getDelay(i))) ; 
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			try {
+				ImageIO.write(img, "jpg", bos) ;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			frames.add(new ImageFrame(new ByteArrayInputStream(bos.toByteArray()), gifDecoder.getDelay(i))) ; 
 		}
 		
 		gifImage.setFrames(frames);
@@ -35,5 +46,5 @@ public class GIFResolveor {
 		return gifImage ;
 
 	}
-
+	
 }

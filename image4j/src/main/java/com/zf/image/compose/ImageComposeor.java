@@ -3,8 +3,11 @@ package com.zf.image.compose;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import com.madgag.gif.fmsware.AnimatedGifEncoder;
 
@@ -33,7 +36,12 @@ public class ImageComposeor {
 		for (int i = 0; i < frames.size(); i++) {
 			ImageFrame frame = frames.get(i) ;
 			int delay = frame.getDelay() ;
-			BufferedImage frameImg = frame.getImage();
+			BufferedImage frameImg = null;
+			try {
+				frameImg = ImageIO.read(frame.getImage());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			if(frameImg == null){
 				continue ;
 			}
