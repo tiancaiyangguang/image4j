@@ -13,12 +13,12 @@ public class ImageFrame {
 	private int delay ;
 	
 	//图片内容
-	private BufferedImage imageStream ;
+	private BufferedImage image ;
 	
 	public ImageFrame() {}
 
-	public ImageFrame(BufferedImage imageStream , int delay) {
-		this.imageStream = imageStream;
+	public ImageFrame(BufferedImage image , int delay) {
+		this.image = image;
 		this.delay = delay;
 	}
 
@@ -30,13 +30,12 @@ public class ImageFrame {
 		this.delay = delay;
 	}
 
-	public BufferedImage getImageStream() {
-		return imageStream;
+	public BufferedImage getImage() {
+		return image;
 	}
 
-	public void setImageStream(BufferedImage imageStream) {
-		this.imageStream = imageStream;
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
-	
 }

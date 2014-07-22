@@ -76,7 +76,7 @@ public class TestCompose {
 
 	public InputStream getSourceImage(String imgName){
 		try {
-			String imgPath = "C:/Users/Administrator/Desktop/" + imgName;
+			String imgPath = "D:/imgtest/" + imgName;
 			return new FileInputStream(new File(imgPath)) ;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -104,7 +104,7 @@ public class TestCompose {
 		InputStream result =  composeor.compose(images, 10000) ;
 		
 		try {
-			IOUtils.copy( result, new FileOutputStream(new File("C:/Users/Administrator/Desktop/com.gif"))) ;
+			IOUtils.copy( result, new FileOutputStream(new File("D:/imgtest/com.gif"))) ;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

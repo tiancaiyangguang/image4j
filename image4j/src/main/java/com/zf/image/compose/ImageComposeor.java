@@ -33,7 +33,7 @@ public class ImageComposeor {
 		for (int i = 0; i < frames.size(); i++) {
 			ImageFrame frame = frames.get(i) ;
 			int delay = frame.getDelay() ;
-			BufferedImage frameImg = frame.getImageStream() ;
+			BufferedImage frameImg = frame.getImage();
 			if(frameImg == null){
 				continue ;
 			}

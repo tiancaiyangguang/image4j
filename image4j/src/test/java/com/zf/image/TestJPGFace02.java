@@ -73,7 +73,7 @@ public class TestJPGFace02 {
 
 	public InputStream getSourceImage(String imgName){
 		try {
-			String imgPath = "C:/Users/Administrator/Desktop/" + imgName;
+			String imgPath = "D:/imgtest/" + imgName;
 			return new FileInputStream(new File(imgPath)) ;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -97,7 +97,7 @@ public class TestJPGFace02 {
 		InputStream result = imgMaker.format(getTextableSourceFace(), getSourceImage("2.jpg"), texts) ;
 
 		try {
-			IOUtils.copy(result, new FileOutputStream(new File("C:/Users/Administrator/Desktop/22.jpg"))) ;
+			IOUtils.copy(result, new FileOutputStream(new File("D:/imgtest/22.jpg"))) ;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
